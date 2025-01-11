@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Occitel_Button_Switch_THT")(type "KiCad")(uri "${KIPRJMOD}/libs/Occitel_Symbols/Occitel_Button_Switch_THT.kicad_sym")(options "")(descr ""))
+  (lib (name "Occitel_Connector_Audio")(type "KiCad")(uri "${KIPRJMOD}/libs/Occitel_Symbols/Occitel_Connector_Audio.kicad_sym")(options "")(descr ""))
+  (lib (name "Occitel_ArduinoProMicro")(type "KiCad")(uri "${KIPRJMOD}/libs/Occitel_Symbols/Occitel_ArduinoProMicro.kicad_sym")(options "")(descr ""))
+  (lib (name "occitel-rescue")(type "KiCad")(uri "${KIPRJMOD}/occitel-backups/occitel-rescue.kicad_sym")(options "")(descr ""))
+)
