@@ -104,6 +104,9 @@ Second half is a cut-down and modified version of the TV Out library (http://cod
 
 end of transmission */
 
+#define ADC_MAX 1023          // seems universal among all Arduinos
+#define POT_DEADZONE 100      // pots need deadzone at end-of-travel otherwise paddle may not reach playfield boundaries
+
 #include <avr/wdt.h>
 
 // Bitmap for the edges - faster than setting individual pixels
@@ -366,12 +369,12 @@ void setSlow() {
     ballSpeed = 1; }}
 
 void gameLoop() {
-  vsync(); cls();
-  uint8_t leftPaddle = map(analogRead(LEFT_POTENTIOMETER),
-                           0, 1023, 2-paddleHeight, fieldHeight-2);
-  drawBoundary(); drawScores(); // distance ADC reads for noise reduction
-  uint8_t rightPaddle = map(analogRead(RIGHT_POTENTIOMETER),
-                            0, 1023, 2-paddleHeight, fieldHeight-2);
+  vsync();
+  uint8_t leftPaddle = map(constrain(analogRead(LEFT_POTENTIOMETER), POT_DEADZONE, ADC_MAX-POT_DEADZONE),
+                           POT_DEADZONE, ADC_MAX-POT_DEADZONE, 2-paddleHeight, fieldHeight-2);
+  cls(); drawBoundary(); drawScores(); // distance ADC reads for noise reduction
+  uint8_t rightPaddle = map(constrain(analogRead(RIGHT_POTENTIOMETER), POT_DEADZONE, ADC_MAX-POT_DEADZONE),
+                            POT_DEADZONE, ADC_MAX-POT_DEADZONE, 2-paddleHeight, fieldHeight-2);
   if(gameNumber==1 || gameNumber==2) { // Tennis or Football
     drawPaddle(1, bat1X, leftPaddle);
     drawPaddle(5, bat5X, rightPaddle); }
